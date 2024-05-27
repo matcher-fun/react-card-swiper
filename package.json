@@ -27,7 +27,7 @@
   "author": "Nativ Sibony (https://github.com/nativsibony)",
   "scripts": {
     "dev": "vite src/demo",
-    "build": "rm -rf dist && vite build",
+    "build": "rimraf dist && vite build",
     "build:web": "vite build src/demo",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "prepare": "npm run build",
@@ -38,7 +38,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.7"
   },
   "devDependencies": {
     "@types/node": "^20.9.4",

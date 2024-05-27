@@ -75,7 +75,7 @@ export class Swiper implements SwiperProps {
     const rotate = this.offsetX * 0.07
     this.element.style.transform = `translate(${this.offsetX}px,0) rotate(${rotate}deg)`
     // dismiss card
-    if (Math.abs(this.offsetX) > this.element.clientWidth * 0.4) {
+    if (Math.abs(this.offsetX) > this.element.clientWidth * 0.9) {
       this.dismiss(this.offsetX > 0 ? 1 : -1)
     }
   }
@@ -84,10 +84,10 @@ export class Swiper implements SwiperProps {
     const ribbonLike = this.element.querySelector('.swipe-card__ribbon-like')
     const ribbonDislike = this.element.querySelector('.swipe-card__ribbon-dislike')
 
-    if (this.offsetX > 10) {
+    if (this.offsetX > 5) {
       ribbonLike?.classList.add('show')
       ribbonDislike?.classList.remove('show')
-    } else if (this.offsetX < -10) {
+    } else if (this.offsetX < -5) {
       ribbonLike?.classList.remove('show')
       ribbonDislike?.classList.add('show')
     } else {
