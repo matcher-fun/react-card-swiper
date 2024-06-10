@@ -82,7 +82,7 @@ export const CardSwiper = (props: CardSwiperProps) => {
           </div>
         </div>
       )),
-    [],
+    [data],
   )
 
   useEffect(() => {
