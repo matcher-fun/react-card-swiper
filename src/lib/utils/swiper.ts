@@ -71,12 +71,14 @@ export class Swiper implements SwiperProps {
     if (!this.startPoint) return
     this.showRibbons()
 
-    this.offsetX = x - this.startPoint.x
-    const rotate = this.offsetX * 0.07
+    const isFliped = this.element.classList.contains('fliped') ? -1 : 1;
+
+    this.offsetX = (x - this.startPoint.x) //* isFliped
+    const rotate = this.offsetX * 0.02
     this.element.style.transform = `translate(${this.offsetX}px,0) rotate(${rotate}deg)`
     // dismiss card
-    if (Math.abs(this.offsetX) > this.element.clientWidth * 0.9) {
-      this.dismiss(this.offsetX > 0 ? 1 : -1)
+    if (Math.abs(this.offsetX) > this.element.clientWidth * 0.8) {
+      this.dismiss(this.offsetX > 0 ? 1 : -1 )
     }
   }
 

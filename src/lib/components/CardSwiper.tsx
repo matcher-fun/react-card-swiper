@@ -10,6 +10,8 @@ import { CardSwiperLeftActionButton } from './CardSwiperLeftActionButton'
 import CardSwiperRibbons from './CardSwiperRibbons'
 import { CardSwiperRightActionButton } from './CardSwiperRightActionButton'
 
+import "./FlipCard.css"
+
 export const CardSwiper = (props: CardSwiperProps) => {
   const { data, likeButton, dislikeButton, withActionButtons = false, emptyState, onDismiss, onFinish, onEnter } = props
   const { handleEnter, handleClickEvents, handleNewCardSwiper, dynamicData, isFinish, swiperIndex, swiperElements } =
@@ -38,24 +40,37 @@ export const CardSwiper = (props: CardSwiperProps) => {
           ref={(ref) => handleNewCardSwiper(ref, id, meta)}
           className="swipe-card__container"
           id="swipe-card__container"
+          
         >
-          {header && (
-            <div className="swipe-card__header-container" id="swipe-card__header-container">
-              <h2 id="swipe-card__header">{header}</h2>
-            </div>
-          )}
-          {props.withRibbons && (
-            <CardSwiperRibbons
-              likeRibbonText={props.likeRibbonText}
-              dislikeRibbonText={props.dislikeRibbonText}
-              ribbonColors={props.ribbonColors}
-            />
-          )}
 
-          <div className="swipe-card__image-container">
-            <img className="swipe-card__image" src={src} alt={src} id="swipe-card__image" />
+        <div className="flip-card" onClick={flipIt}>
+          <div className="flip-card-front">
+            {header && (
+              <div className="swipe-card__header-container" id="swipe-card__header-container">
+                <h2 id="swipe-card__header">{header}</h2>
+              </div>
+            )}
+            {props.withRibbons && (
+              <CardSwiperRibbons
+                likeRibbonText={props.likeRibbonText}
+                dislikeRibbonText={props.dislikeRibbonText}
+                ribbonColors={props.ribbonColors}
+              />
+            )}
+
+            <div className="swipe-card__image-container">
+              <img className="swipe-card__image" src={src} alt={src} id="swipe-card__image" />
+            </div>
+            {content && <div className="swipe-card__content">{content}</div>}
           </div>
-          {content && <div className="swipe-card__content">{content}</div>}
+
+          <div className="flip-card-back">
+            <div>
+            { id }
+            </div>
+          </div>
+
+          </div>
         </div>
       )),
     [],
@@ -122,3 +137,10 @@ export const CardSwiper = (props: CardSwiperProps) => {
     </div>
   )
 }
+
+function flipIt(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  const div = event.currentTarget as HTMLDivElement;
+  div.classList.toggle('fliped');
+  event.preventDefault();
+}
+
