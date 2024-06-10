@@ -57,6 +57,7 @@ export class Swiper implements SwiperProps {
       this.startPoint = { x: clientX, y: clientY }
       document.addEventListener('mousemove', this.handleMouseMove)
       this.element.style.transition = 'transform 0s'
+      e.stopPropagation()
     })
 
     document.addEventListener('mouseup', this.handleMoveUp)

@@ -34,17 +34,27 @@ export const CardSwiper = (props: CardSwiperProps) => {
 
   const CardComponents = useMemo(
     () =>
-      dynamicData.map(({ id, header, src, content, meta }) => (
+      dynamicData.map(({ id, frontContent, backContent, meta }) => (
         <div
           key={id}
           ref={(ref) => handleNewCardSwiper(ref, id, meta)}
           className="swipe-card__container"
           id="swipe-card__container"
-          
         >
 
-        <div className="flip-card" onClick={flipIt}>
+        <div className="flip-card" onPointerUp={flipIt}>
           <div className="flip-card-front">
+
+            {props.withRibbons && (
+              <CardSwiperRibbons
+                likeRibbonText={props.likeRibbonText}
+                dislikeRibbonText={props.dislikeRibbonText}
+                ribbonColors={props.ribbonColors}
+              />
+            )}
+
+            { frontContent }
+            {/*
             {header && (
               <div className="swipe-card__header-container" id="swipe-card__header-container">
                 <h2 id="swipe-card__header">{header}</h2>
@@ -62,12 +72,11 @@ export const CardSwiper = (props: CardSwiperProps) => {
               <img className="swipe-card__image" src={src} alt={src} id="swipe-card__image" />
             </div>
             {content && <div className="swipe-card__content">{content}</div>}
-          </div>
+            */}
+          </div> 
 
           <div className="flip-card-back">
-            <div>
-            { id }
-            </div>
+            { backContent }
           </div>
 
           </div>
@@ -141,6 +150,6 @@ export const CardSwiper = (props: CardSwiperProps) => {
 function flipIt(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   const div = event.currentTarget as HTMLDivElement;
   div.classList.toggle('fliped');
-  event.preventDefault();
+  //event.preventDefault();
 }
 
