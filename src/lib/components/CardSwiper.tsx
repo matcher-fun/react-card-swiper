@@ -39,11 +39,11 @@ export const CardSwiper = (props: CardSwiperProps) => {
           key={id}
           ref={(ref) => handleNewCardSwiper(ref, id, meta)}
           className="swipe-card__container"
-          id="swipe-card__container"
-          
+          id="swipe-card__container" 
         >
 
         <div className="flip-card" onClick={flipIt}>
+
           <div className="flip-card-front">
             {header && (
               <div className="swipe-card__header-container" id="swipe-card__header-container">
