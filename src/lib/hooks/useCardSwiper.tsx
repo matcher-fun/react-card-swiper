@@ -22,10 +22,11 @@ export const useCardSwiper = ({ onDismiss, onFinish, onEnter, data }: UseCardSwi
   const [isFinish, setIsFinish] = useState(false)
 
   useEffect(() => {
+    swiperElements.current = []
     setDynamicData(data)
     setSwiperIndex(data.length)
     setIsFinish(false)
-  }, [data]);
+  }, [data]); 
 
   const handleNewCardSwiper = (ref: HTMLDivElement | null, id: CardId, meta: CardMetaData) => {
     if (ref) {

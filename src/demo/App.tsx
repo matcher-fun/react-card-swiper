@@ -6,6 +6,7 @@ import { SwipeAction, type CardEvent } from '../lib/types/types'
 import { CustomDislikeButton, CustomLikeButton } from './components/Actions'
 import Draggable from './components/Draggable'
 import { mockData } from './mock/mock'
+import { CardData } from '../lib/types/types'
 
 export default function App() {
   const [show, setShow] = useState(false)
@@ -16,6 +17,8 @@ export default function App() {
   const [leftActionButton, setLeftActionButton] = useState<React.JSX.Element | undefined>()
   const [rightActionButton, setRightActionButton] = useState<React.JSX.Element | undefined>()
   const [events, setEvents] = useState<string[]>([])
+
+  const [ ddd, setDdd ] = useState<CardData[]>([])
 
   useEffect(() => {
     if (!defaultActionButtons) {
@@ -33,14 +36,21 @@ export default function App() {
 
   const handleFinish = (status: SwipeAction) => {
     if (status) setEvents((prev) => [...prev, `Finish: ${status}`])
+    setDdd([...mockData].reverse())    
+    console.log('Finish:', status)
   }
+
+  useState(() => {
+    setDdd([...mockData])
+  }, [])
+
 
   return (
     <main className="flex h-full w-full">
       <section className="flex flex-col items-center justify-center h-full w-full overflow-hidden">
         <div className="w-[450px] p-8 h-full">
           <CardSwiper
-            data={mockData}
+            data={ddd}
             onFinish={handleFinish}
             onDismiss={handleSwipe}
             withActionButtons={withActionButtons}

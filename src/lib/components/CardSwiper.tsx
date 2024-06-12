@@ -26,15 +26,24 @@ export const CardSwiper = (props: CardSwiperProps) => {
 
   useEffect(() => {
     setCurrentSwiper(swiperElements.current[swiperIndex - 1])
+    //console.log("index", swiperIndex)
   }, [swiperElements, swiperIndex])
 
   useEffect(() => {
     currentSwiper && handleEnter(currentSwiper.element, currentSwiper.meta, currentSwiper.id)
+    //console.log(currentSwiper)
   }, [currentSwiper])
 
+  useEffect(() => {
+    console.log('gotNewData', dynamicData)
+    //console.log("index", swiperIndex)
+  }, [dynamicData])
+
   const CardComponents = useMemo(
-    () =>
-      dynamicData.map(({ id, frontContent, backContent, meta }) => (
+    () =>{
+      console.log("inMemo")
+      console.log(dynamicData.length)
+      return dynamicData.map(({ id, frontContent, backContent, meta }) => (
         <div
           key={id}
           ref={(ref) => handleNewCardSwiper(ref, id, meta)}
@@ -42,7 +51,7 @@ export const CardSwiper = (props: CardSwiperProps) => {
           id="swipe-card__container"
         >
 
-        <div className="flip-card" onPointerUp={flipIt}>
+        <div className="flip-card" onClick={flipIt}>
           <div className="flip-card-front">
 
             {props.withRibbons && (
@@ -81,15 +90,15 @@ export const CardSwiper = (props: CardSwiperProps) => {
 
           </div>
         </div>
-      )),
-    [],
+      ))},
+    [props.data, dynamicData , ],
   )
 
   useEffect(() => {
     if (isFinish) setHideActionButtons('hide-action-buttons')
   }, [isFinish])
 
-  useEffect(() => {
+/*   useEffect(() => {
     const handleWindowBlur = () => {
       currentSwiper?.handleTouchEnd()
       currentSwiper?.handleMoveUp()
@@ -99,12 +108,13 @@ export const CardSwiper = (props: CardSwiperProps) => {
 
     return () => window.removeEventListener('blur', handleWindowBlur)
   }, [currentSwiper])
+ */
 
   return (
     <div className="swipe-card" id="swipe-card">
       <div className="swipe-card__cards" id="swipe-card__cards">
         {CardComponents}
-        {emptyState && isFinish && <CardSwiperEmptyState children={emptyState} isFinish={isFinish} />}
+        {/* {emptyState && isFinish && <CardSwiperEmptyState children={emptyState} isFinish={isFinish} />} */}
       </div>
       {withActionButtons && (
         <div className={`swipe-card__children ${hideActionButtons}`} id="swipe-card__children">
