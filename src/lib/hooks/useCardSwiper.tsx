@@ -21,6 +21,12 @@ export const useCardSwiper = ({ onDismiss, onFinish, onEnter, data }: UseCardSwi
   const [dynamicData, setDynamicData] = useState(data)
   const [isFinish, setIsFinish] = useState(false)
 
+  useEffect(() => {
+    setDynamicData(data)
+    setSwiperIndex(data.length)
+    setIsFinish(false)
+  }, [data]);
+
   const handleNewCardSwiper = (ref: HTMLDivElement | null, id: CardId, meta: CardMetaData) => {
     if (ref) {
       const currentSwiper = new Swiper({ element: ref, id, meta, onDismiss: handleDismiss })
