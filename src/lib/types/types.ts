@@ -26,8 +26,8 @@ export interface CardData {
   id: CardId
   src: string
   meta: CardMetaData
-  header?: React.JSX.Element
-  content?: React.JSX.Element
+  frontContent?: React.JSX.Element
+  backContent?: React.JSX.Element
 }
 
 export type CardId = string | number
